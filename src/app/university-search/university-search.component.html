@@ -1,0 +1,121 @@
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4 text-center">Search Universities</h2>
+
+  <form (ngSubmit)="onSearch()" class="mb-4">
+    <div class="flex flex-col md:flex-row md:space-x-4 mb-4">
+      <div class="w-full mb-2">
+        <label for="searchQuery" class="block text-sm font-medium">Name</label>
+        <input
+          type="text"
+          id="searchQuery"
+          [(ngModel)]="name"
+          name="name"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder="Enter university name or address"
+        />
+      </div>
+
+      <div class="w-full mb-2">
+        <label for="universityType" class="block text-sm font-medium"
+          >University Type</label
+        >
+        <select
+          id="universityType"
+          [(ngModel)]="universityType"
+          name="universityType"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+        >
+          <option value="">All Types</option>
+          <option value="PUBLIC">Public</option>
+          <option value="PRIVATE">Private</option>
+          <!-- Add other types as needed -->
+        </select>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:space-x-4 mb-4">
+      <div class="w-full mb-2">
+        <label for="ratingFrom" class="block text-sm font-medium"
+          >Rating From</label
+        >
+        <input
+          type="number"
+          id="ratingFrom"
+          [(ngModel)]="ratingFrom"
+          name="ratingFrom"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder="Min Rating"
+          step="0.1"
+          min="0"
+          max="5"
+        />
+      </div>
+
+      <div class="w-full mb-2">
+        <label for="ratingTo" class="block text-sm font-medium"
+          >Rating To</label
+        >
+        <input
+          type="number"
+          id="ratingTo"
+          [(ngModel)]="ratingTo"
+          name="ratingTo"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder="Max Rating"
+          step="0.1"
+          min="0"
+          max="5"
+        />
+      </div>
+      <div class="w-full mb-2">
+        <label for="ratingTo" class="block text-sm font-medium"
+          >Opens From</label
+        >
+        <input
+          type="datetime-local"
+          id="openForm"
+          [(ngModel)]="openForm"
+          name="openForm"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder="opens from"
+        />
+      </div>
+      <div class="w-full mb-2">
+        <label for="ratingTo" class="block text-sm font-medium">Open To</label>
+        <input
+          type="datetime-local"
+          id="openTo"
+          [(ngModel)]="openTo"
+          name="openTo"
+          class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder="open to"
+        />
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button
+        type="submit"
+        class="btn btn-primary bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="universities.length > 0" class="mt-4">
+    <h3 class="text-xl font-bold mb-2">Search Results:</h3>
+    <ul class="list-disc pl-5">
+      <li *ngFor="let university of universities" class="mb-2">
+        <h4 class="font-semibold">{{ university.name }}</h4>
+        <p class="text-gray-600">{{ university.address }}</p>
+        <a
+          [routerLink]="['/universities/all', university.id]"
+          class="btn btn-primary btn-sm mr-2"
+        >
+          <Details></Details>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

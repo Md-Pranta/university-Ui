@@ -1,0 +1,165 @@
+<div class="container mt-5">
+  <h2 class="text-2xl font-bold text-center mb-4">Update University</h2>
+
+  <form
+    (ngSubmit)="onSubmit()"
+    class="w-full max-w-lg mx-auto"
+    enctype="multipart/form-data"
+  >
+    <div class="form-group mb-4">
+      <label for="name" class="form-label text-lg">University Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Enter university name"
+        class="form-control"
+        [(ngModel)]="university.name"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="address" class="form-label text-lg">University Address</label>
+      <input
+        type="text"
+        name="address"
+        id="address"
+        placeholder="Enter university address"
+        class="form-control"
+        [(ngModel)]="university.address"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="universityType" class="form-label text-lg"
+        >University Type</label
+      >
+      <select
+        name="universityType"
+        id="universityType"
+        [(ngModel)]="university.universityType"
+        class="form-control"
+        required
+      >
+        <option *ngFor="let type of universityTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="rating" class="form-label text-lg">Rating</label>
+      <input
+        type="number"
+        name="rating"
+        id="rating"
+        placeholder="Enter Rating"
+        class="form-control"
+        [(ngModel)]="university.rating"
+        step="0.1"
+        min="0"
+        max="5"
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="description" class="form-label text-lg">Description</label>
+      <textarea
+        name="description"
+        id="description"
+        [(ngModel)]="university.description"
+        placeholder="Enter description"
+        class="form-control"
+        rows="4"
+      ></textarea>
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="startingDate" class="form-label text-lg">Starting Date</label>
+      <input
+        type="date"
+        name="startingDate"
+        id="startingDate"
+        class="form-control"
+        [(ngModel)]="university.startingDate"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="casuallyOpensAt" class="form-label text-lg"
+        >Casually Opens At</label
+      >
+      <input
+        type="datetime-local"
+        name="casuallyOpensAt"
+        id="casuallyOpensAt"
+        class="form-control"
+        [(ngModel)]="university.casuallyOpensAt"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="image" class="form-label text-lg">Upload Image</label>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        class="form-control"
+        (change)="onImageChange($event)"
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="otherInformation" class="form-label text-lg"
+        >Other Information</label
+      >
+
+      <div
+        *ngFor="let info of otherInformation; let i = index"
+        class="flex items-center space-x-2 mb-3"
+      >
+        <input
+          type="text"
+          name="key{{ i }}"
+          class="form-control"
+          [(ngModel)]="info.key"
+          placeholder="Enter label"
+        />
+
+        <input
+          type="text"
+          name="value{{ i }}"
+          class="form-control"
+          [(ngModel)]="info.value"
+          placeholder="Enter value"
+        />
+
+        <button
+          type="button"
+          class="btn btn-danger bg-red-500"
+          (click)="removeKey(i)"
+        >
+          Delete
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-secondary bg-green-500"
+        (click)="addField()"
+      >
+        Add New Field
+      </button>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary bg-blue-500 mx-4 my-3">
+        Update
+      </button>
+    </div>
+  </form>
+</div>
